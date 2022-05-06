@@ -6,7 +6,7 @@ app = Flask('app')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-class users(db.Model):
+class Users(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String())
   email = db.Column(db.String())
@@ -14,7 +14,7 @@ class users(db.Model):
   created_at = db.Column(db.String())
   updated_at = db.Column(db.String())
 
-class contacts(db.Model):
+class Contacts(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(100))
   name = db.Column(db.String())
@@ -28,10 +28,10 @@ class contacts(db.Model):
 
 @app.route('/')
 def index():
-  contact = contacts.query.all()
+  contacts = Contacts.query.all()
   return render_template(
     'index.html',
-    contact=contact
+    contacts=contacts
   )
 
 @app.route('/create/', methods=['POST'])
@@ -40,7 +40,7 @@ def create():
   email = request.form.get('email')
   phone = request.form.get('phone')
   
-  new_contacts = contacts(
+  new_contacts = Contacts(
     name=name,
     email=email,
     phone=phone
