@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect
 
 from flask_sqlalchemy import SQLAlchemy
 
@@ -34,7 +34,7 @@ def index():
     contacts=contacts
   )
 
-@app.route('/create/', methods=['POST'])
+@app.route('/create', methods=['POST'])
 def create():
   name = request.form.get('name')
   email = request.form.get('email')
